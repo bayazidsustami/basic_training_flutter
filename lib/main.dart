@@ -37,12 +37,18 @@ class FirstScreen extends StatelessWidget{
           )
         ],
       ),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      body: Column(
         children: <Widget>[
-          IconButton(icon: Icon(Icons.share), onPressed: () {  },),
-          IconButton(icon: Icon(Icons.thumb_up), onPressed: () {  },),
-          IconButton(icon: Icon(Icons.thumb_down), onPressed: () {  },)
+          Text('a title', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+          Text('Lorem ipsum ipsum'),
+          Container(
+            padding: EdgeInsets.all(10),
+            child: Text('text in border'),
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              color: Colors.red
+            ),
+          )
         ],
       )
     );
