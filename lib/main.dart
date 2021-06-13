@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -36,18 +37,13 @@ class FirstScreen extends StatelessWidget{
           )
         ],
       ),
-      body:Center(
-        child: Container(
-          child: Padding(
-            padding: EdgeInsets.all(10),
-            child: Text('Hi', style: TextStyle(fontSize: 40),),
-          ),
-          decoration: BoxDecoration(
-              color: Colors.red,
-              border: Border.all(color: Colors.green, width: 3),
-              borderRadius: BorderRadius.circular(10)
-          ),
-        ),
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          IconButton(icon: Icon(Icons.share), onPressed: () {  },),
+          IconButton(icon: Icon(Icons.thumb_up), onPressed: () {  },),
+          IconButton(icon: Icon(Icons.thumb_down), onPressed: () {  },)
+        ],
       )
     );
   }
