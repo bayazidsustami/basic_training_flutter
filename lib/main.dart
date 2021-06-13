@@ -10,71 +10,39 @@ class MyApp extends StatelessWidget{
       theme: ThemeData(
         primarySwatch: Colors.blue
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Hello World!'),
-        ),
-        body: Center(
-          child: BiggerText(
-            text: 'adakah',
-          ),
-        ),
-      ),
+      home: FirstScreen(),
     );
   }
 }
 
-
-//contoh stateless widget
-class Heading extends StatelessWidget{
-  final String textOfHeading;
-
-  Heading({this.textOfHeading});
-
+class FirstScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return Text(
-      textOfHeading,
-      style: TextStyle(
-        fontSize: 24.0,
-        fontWeight: FontWeight.bold
+    return Scaffold(
+      appBar: AppBar(
+        leading:IconButton(
+          icon: Icon(
+            Icons.menu,
+            color: Colors.white,
+          ), onPressed: () {  },
+        ) ,
+        title: Text('First Screen'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.search,
+              color: Colors.white,
+            ), onPressed: () {  },
+          )
+        ],
       ),
-    );
-  }
-
-}
-
-//conteh stateful widget
-class BiggerText extends StatefulWidget{
-
-  final String text;
-
-  const BiggerText({this.text});
-
-  @override
-  State<StatefulWidget> createState() {
-    return _BiggerTextState();
-  }
-
-}
-
-class _BiggerTextState extends State<BiggerText>{
-  double _textSize= 16.0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(widget.text, style: TextStyle(fontSize: _textSize)),
-        ElevatedButton(
-            onPressed: (){
-              setState(() {
-                _textSize = 32.0;
-              });
-            },
-            child: Text("Perbesar"))
-      ],
+      body: Center(
+        child: Text('Hello World'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {  },
+        child: Icon(Icons.add),
+      ),
     );
   }
 
