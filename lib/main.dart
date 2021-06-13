@@ -40,7 +40,13 @@ class FirstScreen extends StatelessWidget{
         child: Text('Hi', style: TextStyle(fontSize: 40),),
         decoration: BoxDecoration(
           color: Colors.red,
-          shape: BoxShape.circle
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black,
+              offset: Offset(3,6),
+              blurRadius: 10
+            )
+          ]
         ),
       ),
     );
