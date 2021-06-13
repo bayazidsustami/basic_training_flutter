@@ -39,6 +39,8 @@ class FirstScreen extends StatelessWidget{
       body: Container(
         child: Text('Hi', style: TextStyle(fontSize: 40),),
         color: Colors.blue,
+        width: 200,
+        height: 100,
       ),
     );
   }
