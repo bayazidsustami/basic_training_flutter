@@ -37,7 +37,10 @@ class FirstScreen extends StatelessWidget{
         ],
       ),
       body: Container(
-        child: Text('Hi', style: TextStyle(fontSize: 40),),
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Text('Hi', style: TextStyle(fontSize: 40),),
+        ),
         decoration: BoxDecoration(
           color: Colors.red,
           border: Border.all(color: Colors.green, width: 3),
