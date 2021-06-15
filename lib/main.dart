@@ -10,8 +10,10 @@ class MyApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Wisata Bandung',
-      theme: ThemeData(),
-      home: DetailScreen(),
+      theme: ThemeData(
+        primarySwatch: Colors.blue
+      ),
+      home: FirstScreen(),
     );
   }
 }
