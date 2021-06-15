@@ -23,7 +23,7 @@ class FirstScreen extends StatefulWidget{
 
 class _FirstScreen extends State<FirstScreen>{
 
-  String _name;
+  TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +40,7 @@ class _FirstScreen extends State<FirstScreen>{
                 hintText: 'Write your name here',
                 labelText: 'your name'
               ),
-              onChanged: (String value){
-                setState(() {
-                  _name = value;
-                });
-              },
+              controller: _controller,
             ),
             SizedBox(
               height: 20,
@@ -55,7 +51,7 @@ class _FirstScreen extends State<FirstScreen>{
                       context: context,
                       builder: (context){
                         return AlertDialog(
-                          content: Text('Hello $_name'),
+                          content: Text('Hello ${_controller.text}'),
                         );
                       });
                 },
@@ -66,5 +62,10 @@ class _FirstScreen extends State<FirstScreen>{
       )
     );
   }
-  
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 }
