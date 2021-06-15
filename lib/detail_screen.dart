@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+var _informationStyle = TextStyle(fontFamily: 'Oxygen');
+
 class DetailScreen extends StatelessWidget{
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +16,14 @@ class DetailScreen extends StatelessWidget{
                 Image.asset('images/farm-house.jpg'),
                 Container(
                     margin: EdgeInsets.only(top: 16.0),
-                    child: Text('Farm House Lembang')
+                    child: Text(
+                        'Farm House Lembang',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 30.0,
+                        fontFamily: 'Staatliches'
+                      ),
+                    )
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 16.0),
@@ -24,21 +34,21 @@ class DetailScreen extends StatelessWidget{
                         children: <Widget>[
                           Icon(Icons.calendar_today),
                           SizedBox(height: 8.0,),
-                          Text('Open Everyday')
+                          Text('Open Everyday', style: _informationStyle,)
                         ],
                       ),
                       Column(
                         children: <Widget>[
                           Icon(Icons.access_time),
                           SizedBox(height: 8.0,),
-                          Text('09.00-20.00')
+                          Text('09.00-20.00', style: _informationStyle,)
                         ],
                       ),
                       Column(
                         children: <Widget>[
                           Icon(Icons.monetization_on),
                           SizedBox(height: 8.0,),
-                          Text('Rp. 25.000')
+                          Text('Rp. 25.000', style: _informationStyle,)
                         ],
                       )
                     ],
