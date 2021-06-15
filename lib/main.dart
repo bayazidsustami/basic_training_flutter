@@ -8,64 +8,34 @@ class MyApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Wisata Bandung',
-      theme: ThemeData(),
-      home: DetailScreen(),
+      theme: ThemeData(
+        primarySwatch: Colors.blue
+      ),
+      home: FirstScreen(),
     );
   }
 }
 
-class DetailScreen extends StatelessWidget{
+class FirstScreen extends StatefulWidget{
+  @override
+  _FirstScreen createState() => _FirstScreen();
+}
+
+class _FirstScreen extends State<FirstScreen>{
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Container(
-                margin: EdgeInsets.only(top: 16.0),
-                child: Text('Farm House Lembang')
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      Icon(Icons.calendar_today),
-                      SizedBox(height: 8.0,),
-                      Text('Open Everyday')
-                    ],
-                  ),
-                  Column(
-                    children: <Widget>[
-                      Icon(Icons.access_time),
-                      SizedBox(height: 8.0,),
-                      Text('09.00-20.00')
-                    ],
-                  ),
-                  Column(
-                    children: <Widget>[
-                      Icon(Icons.monetization_on),
-                      SizedBox(height: 8.0,),
-                      Text('Rp. 25.000')
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Container(
-              child: Text(
-                  'Berada di jalur utama Bandung-Lembang, Farm House menjadi objek wisata yang tidak pernah sepi pengunjung. Selain karena letaknya strategis, kawasan ini juga menghadirkan nuansa wisata khas Eropa. Semua itu diterapkan dalam bentuk spot swafoto Instagramable.',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16.0),
-              ),
-            )
-          ],
+      appBar: AppBar(
+        title: Text('First Screen'),
+      ),
+      body: Center(
+        child: Image.network(
+          'https://picsum.photos/200/300',
+          width: 200,
+          height: 300,
         ),
       )
     );
   }
-
 }
