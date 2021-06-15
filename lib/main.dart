@@ -2,69 +2,71 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget{
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Wisata Bandung',
-      theme: ThemeData(
-        primarySwatch: Colors.blue
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: FirstScreen(),
     );
   }
 }
 
-class FirstScreen extends StatelessWidget{
-
-  final String helloText = 'Hello from first screen';
-
+class FirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text('First Screen'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context){
-              return SecondScreen(helloText);
-            }));
-          },
-          child: Text('Move to second String'),
-        ),
-      ),
-    );
-  }
-}
-
-class SecondScreen extends StatelessWidget{
-
-  final String message;
-
-  SecondScreen(this.message);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Second Screen'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        backgroundColor: Colors.blueGrey,
+        body: Row(
           children: [
-            OutlinedButton(
-              onPressed: () {
-                Navigator.pop(context);
+            Expanded(child: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+                return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        'MediaQuery: ${screenSize.width.toStringAsFixed(2)}',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                        textAlign: TextAlign.center,
+                      ),
+                      Text(
+                        'LayoutBuilder: ${constraints.maxWidth}',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                        textAlign: TextAlign.center,
+                      ),
+                    ]);
               },
-              child: Text('back to first screen'),
-            ),
-            Text(message)
+            )),
+            Expanded(
+              flex: 3,
+              child: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                return Container(
+                    color: Colors.white,
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            'MediaQuery: ${screenSize.width.toStringAsFixed(2)}',
+                            style:
+                                TextStyle(color: Colors.blueGrey, fontSize: 18),
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            'LayoutBuilder: ${constraints.maxWidth}',
+                            style:
+                                TextStyle(color: Colors.blueGrey, fontSize: 18),
+                            textAlign: TextAlign.center,
+                          ),
+                        ]));
+              }),
+            )
           ],
-        )
-      ),
-    );
+        ));
   }
 }
