@@ -19,56 +19,86 @@ class RainbowScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Expanded(
-            child: Container(
-              color: Colors.red,
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                ExpandedWidget(),
+                FlexibleWidget()
+              ],
             ),
+            Row(
+              children: [
+                ExpandedWidget(),
+                FlexibleWidget()
+              ],
+            ),
+            Row(
+              children: [
+                ExpandedWidget(),
+                FlexibleWidget()
+              ],
+            ),
+            Row(
+              children: [
+                ExpandedWidget(),
+                FlexibleWidget()
+              ],
+            )
+          ],
         ),
-        Expanded(
-          child: Container(
-            color: Colors.orange,
+      ),
+    );
+  }
+}
+
+class ExpandedWidget extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 2,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.teal,
+            border: Border.all(color: Colors.white),
           ),
-        ),
-        Expanded(
-          child: Container(
-            color: Colors.yellow,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              'Expanded',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24
+              ),
+            ),
           ),
-        ),
-        Expanded(
-          child: Container(
-            color: Colors.green,
+        )
+    );
+  }
+}
+
+class FlexibleWidget extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.tealAccent,
+            border: Border.all(color: Colors.white)
           ),
-        ),
-        Expanded(
-          child: Container(
-            color: Colors.blue,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              'Flexible',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24
+              ),
+            ),
           ),
-        ),
-        Expanded(
-          child: Container(
-            color: Colors.indigo,
-          ),
-        ),
-        Expanded(
-          flex: 3,
-          child: Container(
-            color: Colors.purple,
-          ),
-        ),
-        Expanded(
-          child: Container(
-            color: Colors.blueAccent,
-          ),
-        ),
-        Expanded(
-          flex: 2,
-          child: Container(
-            color: Colors.amberAccent,
-          ),
-        ),
-      ],
+        )
     );
   }
 
