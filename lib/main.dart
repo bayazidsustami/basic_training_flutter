@@ -32,10 +32,8 @@ class _FirstScreen extends State<FirstScreen>{
         title: Text('First Screen'),
       ),
       body: TextField(
-        onChanged: (String value){
-          setState(() {
-            language = value;
-          });
+        onSubmitted: (String value){
+          language = value;
         },
       )
     );
