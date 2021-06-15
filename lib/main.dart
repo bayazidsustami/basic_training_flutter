@@ -23,7 +23,7 @@ class FirstScreen extends StatefulWidget{
 
 class _FirstScreen extends State<FirstScreen>{
 
-  String language;
+  String _name;
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +31,38 @@ class _FirstScreen extends State<FirstScreen>{
       appBar: AppBar(
         title: Text('First Screen'),
       ),
-      body: TextField(
-        onSubmitted: (String value){
-          language = value;
-        },
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Write your name here',
+                labelText: 'your name'
+              ),
+              onChanged: (String value){
+                setState(() {
+                  _name = value;
+                });
+              },
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+                onPressed: (){
+                  showDialog(
+                      context: context,
+                      builder: (context){
+                        return AlertDialog(
+                          content: Text('Hello $_name'),
+                        );
+                      });
+                },
+                child: Text('Submit')
+            )
+          ],
+        ),
       )
     );
   }
