@@ -31,29 +31,13 @@ class _FirstScreen extends State<FirstScreen>{
       appBar: AppBar(
         title: Text('First Screen'),
       ),
-      body: DropdownButton<String>(
-        items: <DropdownMenuItem<String>>[
-          DropdownMenuItem<String>(
-            value: 'Dart',
-            child: Text('Dart'),
-          ),
-          DropdownMenuItem<String>(
-            value: 'Kotlin',
-            child: Text('Kotlin'),
-          ),
-          DropdownMenuItem<String>(
-            value: 'Swift',
-            child: Text('Swift'),
-          ),
-        ],
-        value: language,
-        hint: Text('Select programming language'),
+      body: TextField(
         onChanged: (String value){
           setState(() {
             language = value;
           });
         },
-      ),
+      )
     );
   }
   
