@@ -52,6 +52,7 @@ class RainbowScreen extends StatelessWidget{
           ),
         ),
         Expanded(
+          flex: 3,
           child: Container(
             color: Colors.purple,
           ),
@@ -62,6 +63,7 @@ class RainbowScreen extends StatelessWidget{
           ),
         ),
         Expanded(
+          flex: 2,
           child: Container(
             color: Colors.amberAccent,
           ),
