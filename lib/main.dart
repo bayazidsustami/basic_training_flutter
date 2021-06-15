@@ -17,14 +17,14 @@ class MyApp extends StatelessWidget{
 
 class ScrollingScreen extends StatelessWidget{
 
-  final List<int> numberList = <int>[1,2,3,4,5,6,7,8,9,10];
+  final List<int> numberList = <int>[1,2,3,4,5,6,7,8,9,10,11, 12];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: numberList.map((e) =>
-            Container(
+      body: ListView.builder(
+          itemBuilder:(BuildContext context, int index){
+            return Container(
               height: 250,
               decoration: BoxDecoration(
                   color: Colors.grey,
@@ -32,13 +32,14 @@ class ScrollingScreen extends StatelessWidget{
               ),
               child: Center(
                 child: Text(
-                  '$e',
+                  '${numberList[index]}',
                   style: TextStyle(fontSize: 50),
                 ),
               ),
-            )
-        ).toList(),
-      ),
+            );
+          },
+        itemCount: numberList.length,
+      )
     );
   }
 
