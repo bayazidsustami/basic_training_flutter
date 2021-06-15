@@ -23,7 +23,7 @@ class FirstScreen extends StatefulWidget{
 
 class _FirstScreen extends State<FirstScreen>{
 
-  bool lightOn = false;
+  String language;
 
   @override
   Widget build(BuildContext context) {
@@ -31,20 +31,59 @@ class _FirstScreen extends State<FirstScreen>{
       appBar: AppBar(
         title: Text('First Screen'),
       ),
-      body:Switch(
-        value: lightOn,
-        onChanged: (bool value){
-          setState(() {
-            lightOn = value;
-          });
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-                content: Text(lightOn ? 'Light On' : 'Light Off'),
-              duration: Duration(seconds: 1),
-            )
-          );
-        },
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          ListTile(
+            leading: Radio<String>(
+              value: 'Dart',
+              groupValue: language,
+              onChanged: (String value){
+                setState(() {
+                  language = value;
+                  showSnackBar();
+                });
+              },
+            ),
+            title: (Text('Dart')),
+          ),
+          ListTile(
+            leading: Radio<String>(
+              value: 'Kotlin',
+              groupValue: language,
+              onChanged: (String value){
+                setState(() {
+                  language = value;
+                  showSnackBar();
+                });
+              },
+            ),
+            title: (Text('Kotlin')),
+          ),
+          ListTile(
+            leading: Radio<String>(
+              value: 'Swift',
+              groupValue: language,
+              onChanged: (String value){
+                setState(() {
+                  language = value;
+                  showSnackBar();
+                });
+              },
+            ),
+            title: (Text('Swift')),
+          )
+        ],
       )
+    );
+  }
+
+  void showSnackBar(){
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(language),
+          duration: Duration(seconds: 1),
+        )
     );
   }
 }
