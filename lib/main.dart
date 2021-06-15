@@ -22,9 +22,6 @@ class FirstScreen extends StatefulWidget{
 }
 
 class _FirstScreen extends State<FirstScreen>{
-
-  bool isAgree = false;
-
   @override
   Widget build(BuildContext context) {
 
@@ -32,16 +29,12 @@ class _FirstScreen extends State<FirstScreen>{
       appBar: AppBar(
         title: Text('First Screen'),
       ),
-      body: ListTile(
-        leading: Checkbox(
-          value: isAgree,
-          onChanged: (bool value){
-            setState(() {
-              isAgree = value;
-            });
-          },
+      body: Center(
+        child: Image.network(
+          'https://picsum.photos/200/300',
+          width: 200,
+          height: 300,
         ),
-        title: Text('Agree/Disagree'),
       )
     );
   }
