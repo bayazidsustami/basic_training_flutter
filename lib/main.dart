@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_learn/main_screen.dart';
 
-import 'detail_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,10 +9,8 @@ class MyApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Wisata Bandung',
-      theme: ThemeData(
-        primarySwatch: Colors.blue
-      ),
-      home: FirstScreen(),
+      theme: ThemeData(),
+      home: MainScreen(),
     );
   }
 }
