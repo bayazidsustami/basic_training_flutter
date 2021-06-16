@@ -11,94 +11,258 @@ class DetailScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          if(constraints.maxWidth > 800){
+            return DetailWebPage(place: place,);
+          } else{
+            return DetailMobilePage(place: place,);
+          }
+        }
+    );
+  }
+}
+
+class DetailMobilePage extends StatelessWidget{
+  final TourismPlace place;
+
+  const DetailMobilePage({required this.place});
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Stack(
-                  children: <Widget>[
-                    Image.asset(place.imageAsset),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        IconButton(onPressed: ()  =>
-                            Navigator.pop(context),
-                            icon: Icon(Icons.arrow_back)),
-                        FavoriteButton(),
-                      ],
-                    ),
-                  ],
-                ),
-                Container(
-                    margin: EdgeInsets.only(top: 16.0),
-                    child: Text(
-                        place.name,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 30.0,
-                        fontFamily: 'Staatliches'
-                      ),
-                    )
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Stack(
                     children: <Widget>[
-                      Column(
+                      Image.asset(place.imageAsset),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Icon(Icons.calendar_today),
-                          SizedBox(height: 8.0,),
-                          Text(place.openDays, style: _informationStyle,)
+                          IconButton(onPressed: ()  =>
+                              Navigator.pop(context),
+                              icon: Icon(Icons.arrow_back)),
+                          FavoriteButton(),
                         ],
                       ),
-                      Column(
-                        children: <Widget>[
-                          Icon(Icons.access_time),
-                          SizedBox(height: 8.0,),
-                          Text(place.openTime, style: _informationStyle,)
-                        ],
-                      ),
-                      Column(
-                        children: <Widget>[
-                          Icon(Icons.monetization_on),
-                          SizedBox(height: 8.0,),
-                          Text(place.ticketPrice, style: _informationStyle,)
-                        ],
-                      )
                     ],
                   ),
-                ),
-                Container(
-                  child: Text(
-                    place.description,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16.0),
-                  ),
-                ),
-                Container(
-                  height: 150,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: place.imageUrls.map((e) =>
-                        Padding(
-                            padding: EdgeInsets.all(4.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(16.0),
-                              child: Image.network(e),
-                            )
+                  Container(
+                      margin: EdgeInsets.only(top: 16.0),
+                      child: Text(
+                        place.name,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 30.0,
+                            fontFamily: 'Staatliches'
                         ),
-                    ).toList()
+                      )
                   ),
-                )
-              ],
-            ),
-          )
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Column(
+                          children: <Widget>[
+                            Icon(Icons.calendar_today),
+                            SizedBox(height: 8.0,),
+                            Text(place.openDays, style: _informationStyle,)
+                          ],
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Icon(Icons.access_time),
+                            SizedBox(height: 8.0,),
+                            Text(place.openTime, style: _informationStyle,)
+                          ],
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Icon(Icons.monetization_on),
+                            SizedBox(height: 8.0,),
+                            Text(place.ticketPrice, style: _informationStyle,)
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    child: Text(
+                      place.description,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                  Container(
+                    height: 150,
+                    child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: place.imageUrls.map((e) =>
+                            Padding(
+                                padding: EdgeInsets.all(4.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(16.0),
+                                  child: Image.network(e),
+                                )
+                            ),
+                        ).toList()
+                    ),
+                  )
+                ],
+              ),
+            )
         )
     );
   }
+
+}
+
+class DetailWebPage extends StatelessWidget{
+
+  final TourismPlace place;
+
+  const DetailWebPage({required this.place});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 64),
+        child: Center(
+          child: Container(
+            width: 1200,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Wisata Bandung',
+                  style: TextStyle(
+                    fontFamily: 'Staatliches',
+                    fontSize: 32,
+                  ),
+                ),
+                SizedBox(
+                  height: 32,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            child: Image.asset(place.imageAsset),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          SizedBox(height: 16),
+                          Container(
+                            height: 150,
+                            padding: const EdgeInsets.only(bottom: 16),
+                            child: Scrollbar(
+                              isAlwaysShown: true,
+                              child: ListView(
+                                padding: const EdgeInsets.only(bottom: 16),
+                                scrollDirection: Axis.horizontal,
+                                children: place.imageUrls.map((url) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.network(url),
+                                    ),
+                                  );add
+                                }).toList(),
+                              ),
+                            )
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 32,),
+                    Expanded(
+                        child: Card(
+                          child: Container(
+                            padding: const EdgeInsets.all(16),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                Container(
+                                  child: Text(
+                                    place.name,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 30.0,
+                                        fontFamily: 'Staatliches'
+                                    ),
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: <Widget>[
+                                        Icon(Icons.calendar_today),
+                                        SizedBox(width: 8.0),
+                                        Text(
+                                          place.openDays,
+                                          style: _informationStyle,
+                                        ),
+                                      ],
+                                    ),
+                                    FavoriteButton()
+                                  ],
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Icon(Icons.access_time),
+                                    SizedBox(width: 8.0),
+                                    Text(
+                                      place.openTime,
+                                      style: _informationStyle,
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 8.0,),
+                                Row(
+                                  children: <Widget>[
+                                    Icon(Icons.monetization_on),
+                                    SizedBox(width: 8.0),
+                                    Text(
+                                      place.ticketPrice,
+                                      style: _informationStyle,
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                                  child: Text(
+                                    place.description,
+                                    textAlign: TextAlign.justify,
+                                    style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontFamily: 'Oxygen'
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+        )
+      )
+    );
+  }
+
 }
 
 class FavoriteButton extends StatefulWidget{
