@@ -57,22 +57,22 @@ class ItemGrid extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return StaggeredGridView.countBuilder(
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 12,
-        itemCount: listMeal.length,
-        crossAxisCount: countGridItem,
-        itemBuilder: (context, index){
-          return InkWell(
-            onTap: (){
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) =>
-                      DetailScreen(idMeal: listMeal[index].mealId,)
-                  ));
-            },
-            child: Padding(
-              padding: EdgeInsets.all(10),
+    return Padding(
+      padding: EdgeInsets.all(10),
+      child: StaggeredGridView.countBuilder(
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          itemCount: listMeal.length,
+          crossAxisCount: countGridItem,
+          itemBuilder: (context, index){
+            return InkWell(
+              onTap: (){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) =>
+                        DetailScreen(idMeal: listMeal[index].mealId,)
+                    ));
+              },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -127,11 +127,11 @@ class ItemGrid extends StatelessWidget{
                   )
                 ],
               ),
-            ),
-          );
-        },
-        staggeredTileBuilder: (count) =>
-            StaggeredTile.count(1, count.isEven ? 1.2 : 1.4)
+            );
+          },
+          staggeredTileBuilder: (count) =>
+              StaggeredTile.count(1, count.isEven ? 1.4 : 1.9)
+      ),
     );
   }
 }
