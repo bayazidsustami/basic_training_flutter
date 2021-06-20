@@ -20,6 +20,7 @@ class MainScreen extends StatelessWidget {
                     Text(
                       'Meal Catalogue',
                       style: TextStyle(
+                        fontSize: 20,
                           fontFamily: 'Oxygen',
                           fontWeight: FontWeight.bold
                       ),
@@ -32,7 +33,7 @@ class MainScreen extends StatelessWidget {
                       builder: (BuildContext context,  BoxConstraints constraints){
                         if(constraints.maxWidth <= 600){
                           return ItemGrid(countGridItem: 2);
-                        } else if(constraints.maxWidth <= 900){
+                        } else if(constraints.maxWidth <= 1200){
                           return ItemGrid(countGridItem: 4);
                         } else{
                           return ItemGrid(countGridItem: 6);
