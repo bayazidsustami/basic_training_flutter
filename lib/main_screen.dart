@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_learn/detail_screen.dart';
 import 'package:flutter_learn/model/meals_model.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -63,7 +64,13 @@ class ItemGrid extends StatelessWidget{
         crossAxisCount: countGridItem,
         itemBuilder: (context, index){
           return InkWell(
-            onTap: (){},
+            onTap: (){
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>
+                      DetailScreen(idMeal: listMeal[index].mealId,)
+                  ));
+            },
             child: Padding(
               padding: EdgeInsets.all(10),
               child: Column(
