@@ -1,130 +1,162 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_learn/detail_screen.dart';
-import 'package:flutter_learn/model/tourism_place.dart';
+import 'package:flutter_learn/model/meals_model.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:transparent_image/transparent_image.dart';
 
-class MainScreen extends StatelessWidget{
+class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Wisata Bandung'),
-      ),
-      body: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints){
-          if(constraints.maxWidth <= 600){
-            return TourismPlaceList();
-          } else if (constraints.maxWidth <= 1200){
-            return TourismPlaceGrid(gridCount: 4);
-          } else{
-            return TourismPlaceGrid(gridCount: 6);
-          }
-        },
-      )
-    );
-  }
-}
-
-class TourismPlaceList extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(itemBuilder: (context, index){
-      final TourismPlace place = tourismPlaceList[index];
-      return InkWell(
-        onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen(place: place)));
-        },
-        child: Card(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      body: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Image.asset(place.imageAsset),
-              ),
-              Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text(
-                        place.name,
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                      SizedBox(
-                        height: 40,
-                      ),
-                      Text(place.location)
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-      );
-    },
-      itemCount: tourismPlaceList.length,
-    );
-  }
-}
-
-class TourismPlaceGrid extends StatelessWidget{
-
-  final int gridCount;
-
-  TourismPlaceGrid({required this.gridCount});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
-      child: Scrollbar(
-        isAlwaysShown: true,
-        child: GridView.count(
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
-            crossAxisCount: gridCount,
-            children: tourismPlaceList.map((e) => InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen(place: e)));
-              },
-              child: Card(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+              Padding(
+                padding: EdgeInsets.all(16),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: Image.asset(
-                        e.imageAsset,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    SizedBox(height: 8,),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        e.name,
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
-                      child: Text(
-                        e.location,
+                    Text(
+                      'Meal Catalogue',
+                      style: TextStyle(
+                        fontSize: 20,
+                          fontFamily: 'Oxygen',
+                          fontWeight: FontWeight.bold
                       ),
                     ),
                   ],
                 ),
               ),
-            )).toList()
-        ),
-      )
+              Expanded(
+                  child: LayoutBuilder(
+                      builder: (BuildContext context,  BoxConstraints constraints){
+                        if(constraints.maxWidth <= 600){
+                          return ItemGrid(countGridItem: 2);
+                        } else if(constraints.maxWidth <= 1200){
+                          return ItemGrid(countGridItem: 4);
+                        } else{
+                          return ItemGrid(countGridItem: 6);
+                        }
+                      }
+                  )
+              )
+            ],
+          )
+      ),
     );
   }
+}
 
+class ItemGrid extends StatelessWidget{
+
+  final int countGridItem;
+
+  ItemGrid({required this.countGridItem});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(10),
+      child: StaggeredGridView.countBuilder(
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          itemCount: listMeal.length,
+          crossAxisCount: countGridItem,
+          itemBuilder: (context, index){
+            return InkWell(
+              onTap: (){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) =>
+                        DetailScreen(idMeal: listMeal[index].mealId,)
+                    ));
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: FadeInImage.memoryNetwork(
+                          placeholder: kTransparentImage,
+                          image: listMeal[index].mealImg,
+                          fit: BoxFit.cover,
+                        )
+                    ),
+                  ),
+                  SizedBox(height: 7,),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Text(listMeal[index].mealName, style: TextStyle(fontFamily: 'Oxygen', fontWeight: FontWeight.bold),),
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 7,),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                          flex: 3,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.favorite,
+                                color: Colors.blueGrey,
+                              ),
+                              Text(
+                                listMeal[index].mealLikeCount,
+                                style: TextStyle(
+                                    fontFamily: 'Oxygen',
+                                    color: Colors.blueGrey
+                                ),
+                              )
+                            ],
+                          )
+                      ),
+                      Expanded(
+                          flex: 1,
+                          child: BookmarkButton()
+                      )
+                    ],
+                  )
+                ],
+              ),
+            );
+          },
+          staggeredTileBuilder: (count) =>
+              StaggeredTile.count(1, count.isEven ? 1.4 : 1.9)
+      ),
+    );
+  }
+}
+
+class BookmarkButton extends StatefulWidget{
+  @override
+  _BookmarkButtonState createState() => _BookmarkButtonState();
+}
+
+class _BookmarkButtonState extends State<BookmarkButton> {
+
+  var isBookmarked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+        onPressed: (){
+          setState(() {
+            isBookmarked = !isBookmarked;
+          });
+        },
+        icon: Icon(
+          isBookmarked ? Icons.bookmark : Icons.book,
+          color: Colors.blueGrey,
+        )
+    );
+  }
 }
