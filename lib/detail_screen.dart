@@ -10,7 +10,7 @@ class DetailScreen extends StatelessWidget{
 
   DetailScreen({required this.idMeal});
 
-  var unescape = HtmlUnescape();
+  final unescape = HtmlUnescape();
 
   @override
   Widget build(BuildContext context) {
@@ -129,20 +129,20 @@ class FavoriteButton extends StatefulWidget{
 
 class _FavoriteButtonState extends State<FavoriteButton> {
 
-  var isFavorite = false;
+  var _isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: (){
         setState(() {
-          isFavorite = !isFavorite;
+          _isFavorite = !_isFavorite;
         });
       },
       icon: Icon(
         Icons.favorite,
         size: 60,
-        color: isFavorite ? Colors.red : Colors.blueGrey,),
+        color: _isFavorite ? Colors.red : Colors.blueGrey,),
     );
   }
 }
